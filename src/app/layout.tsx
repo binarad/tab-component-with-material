@@ -22,9 +22,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={roboto.variable}>
-			<body className='antialiased'>
+			<body className='antialiased p-5'>
 				<AppRouterCacheProvider options={{ key: 'css' }}>
-					{/* <TabComponent /> */}
+					<TabComponent />
 					{children}
 				</AppRouterCacheProvider>
 			</body>

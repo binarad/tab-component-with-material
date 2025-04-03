@@ -2,10 +2,9 @@ import Tab from '@mui/material/Tab'
 import React from 'react'
 
 interface LinkTabProps {
-	label: string
-	href: string
+	label?: string
+	href?: string
 	selected?: boolean
-	pinned?: boolean
 }
 export function samePageLinkNavigation(
 	event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
