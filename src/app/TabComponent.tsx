@@ -6,20 +6,30 @@ import LinkTab, { samePageLinkNavigation } from './LinkTab'
 import { TabProps } from './page'
 
 import { useTabContext } from './context/TabContext'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function TabComponent() {
 	const { tabs } = useTabContext()
 	const [value, setValue] = useState<number>(0)
+	const pathname = usePathname()
+
+	// To-Do: fix bug with indexes.
+	useEffect(() => {
+		const paths = ['/', ...tabs.map(tab => tab.url)]
+		const currentIndex = paths.findIndex(path => path === pathname)
+
+		if (currentIndex !== -1) {
+			setValue(currentIndex)
+		}
+	}, [pathname, tabs])
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue + 1)
-		console.log(newValue)
+		setValue(newValue)
 	}
 
 	return (
 		<Box sx={{ width: '100%', typography: 'body1' }}>
 			<Tabs
-				selectionFollowsFocus
 				sx={{
 					'.MuiTabs-indicator': {
 						top: 0,
