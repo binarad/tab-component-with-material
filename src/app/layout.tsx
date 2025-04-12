@@ -3,6 +3,7 @@ import type { Metadata } from 'next/'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import TabComponent from './TabComponent'
+import { TabProvider } from './context/TabContext'
 
 const roboto = Roboto({
 	weight: ['300', '400', '500', '700'],
@@ -24,8 +25,10 @@ export default function RootLayout({
 		<html lang='en' className={roboto.variable}>
 			<body className='antialiased p-5'>
 				<AppRouterCacheProvider options={{ key: 'css' }}>
-					<TabComponent />
-					{children}
+					<TabProvider>
+						<TabComponent />
+						{children}
+					</TabProvider>
 				</AppRouterCacheProvider>
 			</body>
 		</html>

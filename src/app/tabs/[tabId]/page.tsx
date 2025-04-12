@@ -1,7 +1,7 @@
 import React from 'react'
 
 async function Page({ params }: { params: { tabId: string } }) {
-	const { tabId } = params
+	const { tabId } = await params
 	return <div>Tab number: {tabId}</div>
 }
 

@@ -4,6 +4,8 @@ import { TextField, Button, Collapse, IconButton } from '@mui/material'
 import TabComponent from './TabComponent'
 import Alert from '@mui/material/Alert'
 
+import { useTabContext } from './context/TabContext'
+
 export interface TabProps {
 	title: string
 	url: string
@@ -11,24 +13,11 @@ export interface TabProps {
 	active?: boolean
 }
 
-// const saveHistory = () => {
-// 	let searchHistoryArray = JSON.parse(localStorage.getItem('tabs') || '[]')
-
-// 	let searchHistory = {
-// 		promptKey: prompt,
-// 	}
-
-// 	if (prompt.length != 0) {
-// 		searchHistoryArray.push(searchHistory)
-// 	}
-
-// 	localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArray))
-// }
-
 export default function Home() {
 	const [tabName, setTabName] = useState<string>('')
 	const [isTitleNull, setIsTitleNull] = useState<boolean>(false)
-	const [tabs, setTabs] = useState<TabProps[]>([])
+
+	const { tabs, setTabs } = useTabContext()
 
 	const handleAdd = (tab: TabProps) => {
 		if (!tab.title.trim()) {
@@ -42,24 +31,9 @@ export default function Home() {
 		setTabName('')
 	}
 
-	useEffect(() => {
-		const savedTabs = localStorage.getItem('tabs')
-		if (savedTabs) {
-			setTabs(JSON.parse(savedTabs))
-		}
-	}, [])
-
 	const handleDeleteTabs = () => {
 		setTabs([])
-		// tabs = []
-		localStorage.removeItem('tabs')
 	}
-
-	useEffect(() => {
-		if (tabs.length > 0) {
-			localStorage.setItem('tabs', JSON.stringify(tabs))
-		}
-	}, [tabs])
 
 	return (
 		<div className='flex flex-col items-center justify-center'>
